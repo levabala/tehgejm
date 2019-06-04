@@ -1,0 +1,20 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "defaultSeverity": "error",
+  "rules": {
+    "no-console": false,
+    "curly": [true, "as-needed"],
+    "no-debugger": false,
+    "jsx-boolean-value": false,
+    "ordered-imports": false,
+    "interface-name": true
+  },
+  "jsRules": {
+    "no-console": false,
+    "curly": [true, "as-needed"],
+    "no-debugger": false,
+    "jsx-boolean-value": false,
+    "ordered-imports": false,
+    "interface-name": true
+  }
+}
