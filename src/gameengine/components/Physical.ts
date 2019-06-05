@@ -13,6 +13,10 @@ export interface IAcceleration {
   y: number;
 }
 
+export interface IBreaking {
+  amount: number;
+}
+
 export interface IMass {
   value: number;
 }
@@ -27,5 +31,6 @@ export enum PhysicalComponent {
   Velocity = "velocity",
   Acceleration = "acceleration",
   Mass = "mass",
-  Health = "health"
+  Health = "health",
+  Breaking = "breaking"
 }

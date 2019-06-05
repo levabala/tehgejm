@@ -1,6 +1,6 @@
-import ICursorFollower from '../entities/ICursorFollower';
+import IEntity from '../entities/IEntity';
 
-type IEntitiesMap = { [id: string]: ICursorFollower };
+type IEntitiesMap = { [id: string]: IEntity };
 type ISystem = (
   entitiesMap: IEntitiesMap,
   {
