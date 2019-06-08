@@ -1,6 +1,6 @@
-import IEntity from '../entities/IEntity';
+import IEntity from '../gameengine/entities/IEntity';
 
-type IEntitiesMap = { [id: string]: IEntity };
+type IEntitiesMap = { [id: string]: IEntity & { renderer: JSX.Element } };
 type ISystem = (
   entitiesMap: IEntitiesMap,
   {

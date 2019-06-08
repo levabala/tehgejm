@@ -1,30 +1,30 @@
-import IPlayerInput from 'src/interfaces/IPlayerInput';
 import GameStore from 'src/stores/GameStore';
 import UIStore from 'src/stores/UIStore';
 
-import { IAcceleration } from '../components/Physical';
+import ISystem from '../../interfaces/ISystem';
 import { IPlayer } from '../components/Player';
-import ISystem from './ISystem';
 
 const PlayInputSystem: ISystem = entitiesMap => {
   const enitites = Object.values(entitiesMap);
-  const playersEntities = enitites.filter(e => e.player && e.acceleration);
+  const playersEntities = enitites.filter(e => e.player);
 
   playersEntities.forEach(e => {
     const player = e.player as IPlayer;
-    const acceleration = e.acceleration as IAcceleration;
+    const { shooter, acceleration } = e;
 
-    // console.log(player);
+    if (player.id !== 0) return;
 
-    if (player.id < 0 || player.id > 1) return;
+    const { input1: moveInput, input2: shootInput } = UIStore;
 
-    const input =
-      player.id === 0
-        ? UIStore.input1
-        : ((player.id === 1 ? UIStore.input2 : null) as IPlayerInput);
-
-    acceleration.x = input.dx * GameStore.playerInputScale;
-    acceleration.y = input.dy * GameStore.playerInputScale;
+    if (acceleration) {
+      acceleration.x = moveInput.dx * GameStore.playerInputScale;
+      acceleration.y = moveInput.dy * GameStore.playerInputScale;
+    }
+    if (shooter) {
+      const doShoot = shootInput.distance !== 0;
+      shooter.doShoot = doShoot;
+      shooter.shootAngle = doShoot ? shootInput.angle : shooter.shootAngle;
+    }
   });
 
   return entitiesMap;

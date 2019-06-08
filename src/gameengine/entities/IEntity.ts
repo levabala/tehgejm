@@ -1,8 +1,9 @@
-import { PhysicalComponent } from '../components/Physical';
-import { PlayerComponent } from '../components/Player';
+import { GamePlayComponent, GamePlayComponentMap } from '../components/GamePlay';
+import { PhysicalComponent, PhysicalComponentMap } from '../components/Physical';
+import { PlayerComponent, PlayerComponentMap } from '../components/Player';
 
-type AllComponents = PhysicalComponent | PlayerComponent;
-
-type IEntity = { [key in AllComponents]?: any };
+type IEntity = { [key in PhysicalComponent]?: PhysicalComponentMap[key] } &
+  { [key in PlayerComponent]?: PlayerComponentMap[key] } &
+  { [key in GamePlayComponent]?: GamePlayComponentMap[key] };
 
 export default IEntity;

@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IDiameter, IPosition } from 'src/gameengine/components/Physical';
-import IRunner from 'src/gameengine/entities/IRunner';
+import IBullet from 'src/gameengine/entities/IBullet';
 
-export interface IProps extends IRunner {}
-
+export interface IProps extends IBullet {}
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: "red",
     position: "absolute"
   }
 });
 
-export default class Runner extends React.Component<IProps> {
+export default class Bullet extends React.Component<IProps> {
   public render() {
     const { position, diameter } = this.props;
+    const { color } = this.props;
     const { x, y } = position as IPosition;
     const { value: dia } = diameter as IDiameter;
 
@@ -26,7 +25,8 @@ export default class Runner extends React.Component<IProps> {
             top: y - dia / 2,
             width: dia,
             height: dia,
-            borderRadius: dia
+            borderRadius: dia,
+            backgroundColor: color ? color.value : "green"
           },
           styles.main
         )}

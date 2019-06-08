@@ -6,3 +6,7 @@ export interface IPlayer {
 export enum PlayerComponent {
   Player = "player"
 }
+
+export interface PlayerComponentMap {
+  [PlayerComponent.Player]: IPlayer;
+}

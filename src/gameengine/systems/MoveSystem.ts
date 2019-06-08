@@ -1,7 +1,7 @@
 import GameStore from 'src/stores/GameStore';
 
+import ISystem from '../../interfaces/ISystem';
 import { IAcceleration, IBreaking, IPosition, IVelocity } from '../components/Physical';
-import ISystem from './ISystem';
 
 const MoveSystem: ISystem = entitiesMap => {
   const enitites = Object.values(entitiesMap);
@@ -14,17 +14,21 @@ const MoveSystem: ISystem = entitiesMap => {
     const position = e.position as IPosition;
     const velocity = e.velocity as IVelocity;
     const acceleration = e.acceleration as IAcceleration;
-    const breaking: IBreaking = e.breaking || { amount: 0 };
+    const breaking: IBreaking = e.breaking || { value: 0 };
 
     const velocityAngle = Math.atan2(velocity.y, velocity.x);
-    const breakingX = breaking.amount * Math.cos(velocityAngle);
-    const breakingY = breaking.amount * Math.sin(velocityAngle);
+    const breakingX = breaking.value * Math.cos(velocityAngle);
+    const breakingY = breaking.value * Math.sin(velocityAngle);
     const breakingXNormalized =
-      Math.min(Math.abs(breakingX), Math.abs(velocity.x)) *
-      Math.sign(velocity.x);
+      Math.min(
+        Math.abs(breakingX),
+        Math.max(Math.abs(velocity.x), Math.abs(acceleration.x))
+      ) * Math.sign(velocity.x);
     const breakingYNormalized =
-      Math.min(Math.abs(breakingY), Math.abs(velocity.y)) *
-      Math.sign(velocity.y);
+      Math.min(
+        Math.abs(breakingY),
+        Math.max(Math.abs(velocity.x), Math.abs(acceleration.y))
+      ) * Math.sign(velocity.y);
 
     acceleration.x -= breakingXNormalized;
     acceleration.y -= breakingYNormalized;

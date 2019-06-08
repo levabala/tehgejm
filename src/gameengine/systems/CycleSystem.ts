@@ -1,6 +1,6 @@
 import GameStore from 'src/stores/GameStore';
 
-import ISystem from './ISystem';
+import ISystem from '../../interfaces/ISystem';
 
 const CycleSystem: ISystem = entitiesMap => {
   GameStore.previousProcessStamp = GameStore.currentProcessStamp;
