@@ -8,7 +8,7 @@
     "clean": "watchman watch-del-all && rm -rf package-lock.json && rm -rf node_modules && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-map-* && npm install"
   },
   "dependencies": {
-    "expo": "^32.0.0",
+    "expo": "^46.0.14",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-game-engine": "^0.11.5",
